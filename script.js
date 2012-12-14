@@ -37,17 +37,21 @@ Player.prototype.symbolToTime = function(symbol) {
 };
 
 Player.prototype.addSymbolToQueue = function(symbol) {
+    var type = null;
+    var time = null;
+
     if (symbol == ' ') {
-        this.queue.push({
-            type: 's',
-            time: [this.spaceSize]
-        });
+        type = 's';
+        time = [this.spaceSize];
     } else {
-        this.queue.push({
-            type: 'l',
-            time: this.symbolToTime(symbol)
-        });
+        type = 'l';
+        time = this.symbolToTime(symbol);
     }
+
+    this.queue.push({
+        type: type,
+        time: time
+    });
 };
 
 Player.prototype.run = function() {
@@ -161,10 +165,6 @@ function Morse(player, field, button, form) {
 
     this.events();
 }
-
-Morse.prototype.fillList = function() {
-
-};
 
 Morse.prototype.events = function() {
     var self = this;
